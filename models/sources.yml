@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: wind_power
+    catalog: workspace
+    schema: wind_power
+    tables:
+      - name: wind_power_bronze

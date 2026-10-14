@@ -5,3 +5,7 @@ dbt_packages/
 .DS_Store
 .env
 profiles.yml
+
+# Local files
+.user.yml
+install-dbt.log

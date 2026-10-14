@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: dim_date
+    description: "Dimension calendrier pour l'analyse de la production éolienne."
+    columns:
+      - name: date_id
+        description: "Clé naturelle de la date."
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_time
+    description: "Dimension temporelle pour l'analyse par heure et période de la journée."
+    columns:
+      - name: time_id
+        description: "Clé naturelle de l'heure."
+        data_tests:
+          - not_null
+
+  - name: dim_turbine
+    description: "Dimension descriptive des turbines éoliennes."
+    columns:
+      - name: turbine_id
+        description: "Identifiant numérique de la turbine."
+        data_tests:
+          - unique
+          - not_null
+      - name: turbine_name
+        data_tests:
+          - not_null
+
+  - name: dim_operational_status
+    description: "Dimension des statuts opérationnels et des départements responsables."
+    columns:
+      - name: status_id
+        description: "Identifiant numérique du statut opérationnel."
+        data_tests:
+          - unique
+          - not_null
+      - name: status
+        data_tests:
+          - not_null
+
+  - name: fact_production
+    description: "Table de faits contenant les mesures de production éolienne."
+    columns:
+      - name: production_id
+        description: "Identifiant de l'enregistrement de production."
+        data_tests:
+          - unique
+          - not_null
+      - name: date_id
+        data_tests:
+          - not_null
+      - name: time_id
+        data_tests:
+          - not_null
+      - name: turbine_id
+        data_tests:
+          - not_null
+      - name: status_id
+        data_tests:
+          - not_null
