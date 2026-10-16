@@ -10,8 +10,13 @@ on:
 
 jobs:
   validate:
-    name: Validate dbt project
+    name: Validate and test dbt project
     runs-on: ubuntu-latest
+
+    env:
+      DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+      DATABRICKS_HTTP_PATH: ${{ secrets.DATABRICKS_HTTP_PATH }}
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -27,5 +32,28 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install dbt-core==1.12.5 dbt-databricks==1.12.7 pyarrow==15.0.0
 
-      - name: Check dbt project configuration
+      - name: Check dbt version
         run: dbt --version
+
+      - name: Create dbt profiles
+        run: |
+          cat > profiles.yml <<'YAML'
+          wind_power_databricks:
+            target: dev
+            outputs:
+              dev:
+                type: databricks
+                catalog: workspace
+                schema: wind_power
+                host: "{{ env_var('DATABRICKS_HOST') }}"
+                http_path: "{{ env_var('DATABRICKS_HTTP_PATH') }}"
+                token: "{{ env_var('DATABRICKS_TOKEN') }}"
+                threads: 4
+          YAML
+
+      - name: Check Databricks connection
+        run: dbt debug --profiles-dir .
+
+
+      - name: Run dbt tests
+        run: dbt test --profiles-dir .
