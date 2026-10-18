@@ -194,7 +194,7 @@ Les vérifications effectuées sur le jeu de données ont donné les résultats 
 
 
 ```
-**Indicateur**                                           **Résultat**
+Indicateur                                                Résultat
 
 Enregistrements dans la table de faits                      6 048
 
