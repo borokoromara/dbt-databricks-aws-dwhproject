@@ -192,6 +192,8 @@ dbt clean --profiles-dir .
 
 Les vérifications effectuées sur le jeu de données ont donné les résultats suivants :
 
+
+```
 **Indicateur**                                           **Résultat**
 
 Enregistrements dans la table de faits                      6 048
@@ -213,6 +215,7 @@ Identifiants de statut manquants dans les faits                 0
 Valeurs d'énergie manquantes dans les faits                     0
 
 Tests dbt réussis                                       18 sur 18
+```
 
 Les tests contrôlent notamment l'unicité des identifiants de production, l'absence de valeurs nulles sur les colonnes ciblées et la validité des clés étrangères vers les dimensions.
 
@@ -250,7 +253,7 @@ Dépôt GitHub : https://github.com/borokoromara/dbt-databricks-aws-dwhproject
 L’analyse a été réalisée à partir des données de production éolienne du 1er au 14 juin 2024, à l’aide de requêtes SQL exécutées dans Databricks.
 
 ## **1. Comparaison de la production par turbine**
-
+```
 Turbine         Nombre de mesures    Énergie totale     Énergie moyenne
 
 Turbine A             2 016           2 329 587,60         1 155,55
@@ -258,6 +261,7 @@ Turbine A             2 016           2 329 587,60         1 155,55
 Turbine C             2 016           2 260 847,52         1 121,45
 
 Turbine B             2 016           2 257 536,17         1 119,81
+```
 
 La turbine A présente la production totale la plus élevée sur la période observée. Les trois turbines disposent du même nombre de mesures, ce qui facilite leur comparaison.
 
@@ -272,7 +276,7 @@ La production varie au cours de la période. Une analyse complémentaire des con
 ## **3. Relation entre vitesse du vent et énergie produite**
 
 Les observations ont été réparties en trois catégories exploratoires :
-
+```
 Catégorie de vent   Nombre de mesures  Vitesse moyenne  Énergie moyenne
 
 Faible (< 5)             814                3,52          1 138,84
@@ -280,10 +284,12 @@ Faible (< 5)             814                3,52          1 138,84
 Modérée (5 à 10)       1 325                7,51          1 136,80
 
 Forte (10 et plus)     3 905               17,45          1 129,36
+```
 
 Dans ce jeu de données, la production moyenne ne croît pas avec la vitesse moyenne du vent selon ces catégories. Ce résultat descriptif ne démontre pas une relation causale. Les unités, les conditions d’exploitation et la distribution des observations doivent être prises en compte pour approfondir cette analyse.
 
 ## **4. Statuts opérationnels**
+```
 Statut                  Nombre de mesures              Énergie moyenne
 
 Online                            5 485                     1 248,49
@@ -297,11 +303,12 @@ Reactive Maintenance                171                            0
 Offline                             130                            0
 
 Inspection                           51                            0
+```
 
 Les observations non Online présentent une énergie produite nulle dans les données analysées. Les contrôles complémentaires n’ont détecté aucune observation Online avec une énergie nulle ni aucune observation non Online avec une énergie positive.
 
 ## **5. Taux d'observations Online par turbine**
-
+```
 Turbine         Mesures Online     Mesures non Online         Taux Online
 
 Turbine B               1 838                    178              91,17 %
@@ -309,7 +316,7 @@ Turbine B               1 838                    178              91,17 %
 Turbine A               1 834                    182              90,97 %
 
 Turbine C               1 813                    203              89,93 %
-
+```
 
 La turbine B présente le taux d'observations Online le plus élevé sur la période. Cet indicateur représente la proportion des observations classées Online, et non un taux officiel de disponibilité technique.
 
