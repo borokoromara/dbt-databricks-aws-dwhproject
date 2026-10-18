@@ -88,6 +88,9 @@ fact_production : identifiants de production, clés vers les dimensions et mesur
 ## **4. Structure du dépôt**
 
 .
+## Structure du projet
+
+```text
 ├── dbt_project.yml
 ├── models/
 │   ├── sources.yml
@@ -107,8 +110,9 @@ fact_production : identifiants de production, clés vers les dimensions et mesur
 │   ├── assert_fact_status_fk.sql
 │   └── assert_fact_turbine_fk.sql
 └── README.md
+```
 
-## **5. Prérequis **
+## **5.Prérequis**
 
 Python 3.12
 
@@ -128,7 +132,7 @@ dbt Core 1.12.5
 
 dbt-databricks 1.12.7
 
-## **6. Installation et configuration **
+## **6. Installation et configuration**
 
 **Cloner le dépôt**
 
